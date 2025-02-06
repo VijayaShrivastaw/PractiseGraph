@@ -9,6 +9,10 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import PoolSVG from '../../Assets/Svgs/PoolSvg';
+import PlumberSVG from '../../Assets/Svgs/PlumberSVG';
+import GardenSVG from '../../Assets/Svgs/GardenSVG';
+import LiftSVG from '../../Assets/Svgs/LiftSVG';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -50,7 +54,24 @@ const villa = [
         email: 'ritikagupta61341@gmail.com',
         phone: 9667879152,
       },
-      amenities: ['Pool', 'Plumber', 'Garbage Collector', 'Garden'],
+      amenities: [
+        {
+          icon: <PoolSVG />,
+          name: 'Pool',
+        },
+        {
+          icon: <PlumberSVG />,
+          name: 'Plumber',
+        },
+        {
+          icon: <LiftSVG />,
+          name: 'LiftSVG',
+        },
+        {
+          icon: <GardenSVG />,
+          name: 'Garden',
+        },
+      ],
       nearbyFacilities: {
         schools: true,
         markets: false,
@@ -95,6 +116,18 @@ const villa = [
       possessionDate: '2024-11-27T09:37:03.824Z',
       __v: 0,
     },
+    insights: {
+      likes: 50,
+      views: 120,
+      reachedPersons: 80,
+      interestedPersons: 35,
+      regionData: [
+        {region: 'New York', views: 50},
+        {region: 'Los Angeles', views: 30},
+        {region: 'Chicago', views: 40},
+      ],
+      chatInitiated: 10,
+    },
   },
   {
     property: {
@@ -133,7 +166,24 @@ const villa = [
         email: 'nileshpandey212@gmail.com',
         phone: 7726906242,
       },
-      amenities: ['Pool', 'Plumber', 'Garbage Collector', 'Garden'],
+      amenities: [
+        {
+          icon: <PoolSVG />,
+          name: 'Pool',
+        },
+        {
+          icon: <PlumberSVG />,
+          name: 'Plumber',
+        },
+        {
+          icon: <LiftSVG />,
+          name: 'LiftSVG',
+        },
+        {
+          icon: <GardenSVG />,
+          name: 'Garden',
+        },
+      ],
       nearbyFacilities: {
         schools: true,
         markets: false,
@@ -151,7 +201,7 @@ const villa = [
       videos: [
         'https://rentlog-test.s3.ap-south-1.amazonaws.com/Property/Property_Videos/U66001502490_P17572914737.mp4',
       ],
-      propertyType: 'Villa',
+      propertyType: 'Flat',
       propertyDetails: 'P17573336484',
       viewsByTime: {
         day: 18,
@@ -178,10 +228,22 @@ const villa = [
       possessionDate: '2024-11-27T09:37:03.824Z',
       __v: 0,
     },
+    insights: {
+      likes: 200,
+      views: 100,
+      reachedPersons: 90,
+      interestedPersons: 20,
+      regionData: [
+        {region: 'New York', views: 50},
+        {region: 'Los Angeles', views: 30},
+        {region: 'India', views: 40},
+      ],
+      chatInitiated: 50,
+    },
   },
 ];
 
-const GraphScreen = () => {
+const HomeScreeen = () => {
   const navigation = useNavigation();
 
   function formatCost(value) {
@@ -216,7 +278,7 @@ const GraphScreen = () => {
             <TouchableOpacity
               style={{flexDirection: 'row'}}
               onPress={() => {
-                navigation.navigate('ChartScreen', {item});
+                navigation.navigate('DetailsScreen', {item});
               }}>
               <View
                 style={{
@@ -229,7 +291,8 @@ const GraphScreen = () => {
                 <View style={styles.imageContainer}>
                   <Image
                     source={{
-                      uri: 'https://rumah.soloproperty.co.id/wp-content/uploads/2022/04/rumah.png',
+                      uri: item?.property.photos[0],
+                      // uri: 'https://rumah.soloproperty.co.id/wp-content/uploads/2022/04/rumah.png',
                     }}
                     resizeMode="cover"
                     style={styles.image}
@@ -246,18 +309,6 @@ const GraphScreen = () => {
                         {item.property.propertyType} in{' '}
                         {item.property.location.city}
                       </Text>
-                      <TouchableOpacity>
-                        <Image
-                          source={{
-                            uri: 'https://i.pinimg.com/236x/5c/f9/a8/5cf9a86adda496fd8442a67e22d24935.jpg',
-                          }}
-                          style={{
-                            width: 30,
-                            height: 30,
-                            resizeMode: 'contain',
-                          }} // Add the desired width and height
-                        />
-                      </TouchableOpacity>
                     </View>
 
                     <View style={styles.areaContainer}>
@@ -318,43 +369,6 @@ const GraphScreen = () => {
           </>
         )}
       />
-      <TouchableOpacity
-        style={{
-          backgroundColor: 'red',
-          width: width - 40,
-          height: 60,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 10,
-        }}
-        onPress={() => navigation.navigate('HomeScreeen')}>
-        <Text
-          style={{
-            color: '#fff',
-            fontSize: 25,
-          }}>
-          View Data
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{
-          backgroundColor: 'red',
-          width: width - 40,
-          height: 60,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 10,
-          marginTop: 20,
-        }}
-        onPress={() => navigation.navigate('DummyScreen')}>
-        <Text
-          style={{
-            color: '#fff',
-            fontSize: 25,
-          }}>
-          Dummy Data
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -364,10 +378,13 @@ const styles = StyleSheet.create({
     width: width / 3,
     borderRadius: 10,
   },
+  imageContainer: {
+    paddingRight: 10,
+  },
   propertyContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
 });
 
-export default GraphScreen;
+export default HomeScreeen;
