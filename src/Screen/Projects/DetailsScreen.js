@@ -9,7 +9,7 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
-import {BarChart} from 'react-native-chart-kit';
+import {BarChart, LineChart} from 'react-native-chart-kit';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvySvg from '../../Assets/Svgs/EvySvg';
 import StepsSvg from '../../Assets/Svgs/StepsSvg';
@@ -192,18 +192,25 @@ const DetailsScreen = () => {
       </Text>
       <FlatList
         data={item.property.amenities}
-        keyExtractor={item => item.label}
-        numColumns={2}
+        keyExtractor={item => item.name}
+        numColumns={3}
         renderItem={({item}) => (
           <TouchableOpacity
             style={{
-              flex: 1,
-              padding: 10,
+              //   flex: 1,
+              padding: 5,
               margin: 5,
-              backgroundColor: '#eee',
+              //   width: 200,
+              width: 112,
+              // backgroundColor: 'red',
+              backgroundColor: '#F2F0EF',
+              elevation: 1,
+              borderWidth: 1,
+              borderColor: 'rgb(243, 197, 197)',
               borderRadius: 8,
               //   elevation: 0.5,
               alignItems: 'center',
+              justifyContent: 'center',
             }}>
             {item.icon}
             <Text style={{fontSize: 16, fontWeight: 'bold'}}>{item.name}</Text>
@@ -211,10 +218,10 @@ const DetailsScreen = () => {
         )}
       />
       {/* Region-based Graph */}
-      <Text style={{fontSize: 18, fontWeight: 'bold', marginVertical: 10}}>
-        Region-Based Views
+      <Text style={{marginVertical: 8, color: '#000', fontWeight: '500'}}>
+        Region-Based Views :
       </Text>
-      <BarChart
+      <LineChart
         data={{
           labels: item.insights.regionData.map(d => d.region),
           datasets: [{data: item.insights.regionData.map(d => d.views)}],
@@ -224,12 +231,13 @@ const DetailsScreen = () => {
         }}
         width={380}
         height={300}
+        bezier
         yAxisLabel=""
         chartConfig={{
           backgroundGradientFrom: '#fff',
           backgroundGradientTo: '#fff',
           decimalPlaces: 0,
-          color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`,
+          color: opacity => `rgb(243, 197, 197)`,
           labelColor: () => '#000',
         }}
         verticalLabelRotation={30}
