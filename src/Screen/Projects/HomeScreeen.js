@@ -9,7 +9,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import PoolSVG from '../../Assets/Svgs/PoolSvg';
+import PoolSVG from '../../Assets/Svgs/PoolSVG';
 import PlumberSVG from '../../Assets/Svgs/PlumberSVG';
 import GardenSVG from '../../Assets/Svgs/GardenSVG';
 import LiftSVG from '../../Assets/Svgs/LiftSVG';
@@ -91,14 +91,7 @@ const villa = [
       ],
       propertyType: 'Villa',
       propertyDetails: 'P17519078094',
-      viewsByTime: {
-        day: 20, // example: 20 views in the past day
-        week: 100, // example: 100 views in the past week
-        month: 350, // example: 350 views in the past month
-        year: 120, // example: 1200 views in the past year
-        fiveYears: 500, // example: 5000 views in the past 5 years
-        allTime: 385, // total views
-      },
+
       __v: 0,
     },
     Property_Details: {
@@ -127,6 +120,13 @@ const villa = [
         {region: 'Chicago', views: 40},
       ],
       chatInitiated: 10,
+    },
+    viewCounts: {
+      day: [50, 70, 120, 20, 300, 450, 500], // Last 7 days
+      week: [1000, 1500, 180, 1200, 2300], // Last 5 weeks
+      month: [5000, 7000, 800, 9000, 1000, 12000], // Last 6 months
+      year: [30000, 4000, 2000, 60000, 70000], // Last 5 years
+      allTime: 385,
     },
   },
   {
@@ -203,14 +203,7 @@ const villa = [
       ],
       propertyType: 'Flat',
       propertyDetails: 'P17573336484',
-      viewsByTime: {
-        day: 18,
-        week: 95,
-        month: 300,
-        year: 110,
-        fiveYears: 400,
-        allTime: 328,
-      },
+
       __v: 0,
     },
     Property_Details: {
@@ -239,6 +232,14 @@ const villa = [
         {region: 'India', views: 40},
       ],
       chatInitiated: 50,
+    },
+    viewCounts: {
+      day: [30, 70, 100, 20, 300, 450, 500], // Last 7 days
+      week: [9000, 3500, 180, 1200, 2300], // Last 5 weeks
+      month: [7000, 7000, 800, 9000, 1000, 12000], // Last 6 months
+      year: [20000, 4000, 2000, 80000, 70000], // Last 5 years
+      allTime: 328,
+      allTime: 328,
     },
   },
 ];
@@ -278,7 +279,8 @@ const HomeScreeen = () => {
             <TouchableOpacity
               style={{flexDirection: 'row'}}
               onPress={() => {
-                navigation.navigate('DetailsScreen', {item});
+                // navigation.navigate('DetailsScreen', {item});
+                navigation.navigate('PropertyScreen', {item});
               }}>
               <View
                 style={{
