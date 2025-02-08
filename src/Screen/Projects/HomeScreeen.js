@@ -371,6 +371,44 @@ const HomeScreeen = () => {
           </>
         )}
       />
+      <TouchableOpacity
+        style={{
+          backgroundColor: 'red',
+          width: width - 40,
+          height: 60,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 10,
+          marginTop: 20,
+        }}
+        onPress={() => navigation.navigate('NewPropertyScreen')}>
+        <Text
+          style={{
+            color: '#fff',
+            fontSize: 25,
+          }}>
+          NewProperty Screen
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{
+          backgroundColor: 'red',
+          width: width - 40,
+          height: 60,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 10,
+          marginTop: 20,
+        }}
+        onPress={() => navigation.navigate('Dashboard')}>
+        <Text
+          style={{
+            color: '#fff',
+            fontSize: 25,
+          }}>
+          Dashboard
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

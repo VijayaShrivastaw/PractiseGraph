@@ -10,6 +10,9 @@ import DummyScreen from '../Screen/DummyScreen';
 import HomeScreeen from '../Screen/Projects/HomeScreeen';
 import DetailsScreen from '../Screen/Projects/DetailsScreen';
 import PropertyScreen from '../Screen/Projects/PropertyScreen';
+import NewPropertyScreen from '../Screen/Projects/NewPropertyScreen';
+import dashboard from '../Screen/Graph/Dashboard';
+import Dashboard from '../Screen/Graph/Dashboard';
 
 const Stack = createStackNavigator();
 export default function StackNavigationScreen() {
@@ -49,6 +52,16 @@ export default function StackNavigationScreen() {
         <Stack.Screen
           name="PropertyScreen"
           component={PropertyScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="NewPropertyScreen"
+          component={NewPropertyScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Dashboard"
+          component={Dashboard}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

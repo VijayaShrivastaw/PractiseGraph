@@ -1,5 +1,5 @@
-import { useRoute } from '@react-navigation/native';
-import React, { useState, useEffect } from 'react';
+import {useRoute} from '@react-navigation/native';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -11,28 +11,29 @@ import {
   Animated,
   Easing,
 } from 'react-native';
-import { PieChart } from 'react-native-chart-kit';
+import {PieChart} from 'react-native-chart-kit';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { RFValue } from 'react-native-responsive-fontsize';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {RFValue} from 'react-native-responsive-fontsize';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import LineGraph from './LineGraph';
-import ZigZagGraph, { ZigzagGraph } from './ZigZagGraph';
-import { ZigZagCircularGraph } from './ZigZagCircularGraph';
+import ZigZagGraph, {ZigzagGraph} from './ZigZagGraph';
+import {ZigZagCircularGraph} from './ZigZagCircularGraph';
 import AllTypeGraph from './AllTypeGraph';
-import { BezierGraph } from './BezierGraph';
-import { MultiUseGraph } from '../Graph/MultiUseGraph';
+import {BezierGraph} from './BezierGraph';
+import {MultiUseGraph} from '../Graph/MultiUseGraph';
+
 const data = [10, 50, 30, 70, 20, 90, 40]; // Example dataset
 
-const { height, width } = Dimensions.get('screen');
+const {height, width} = Dimensions.get('screen');
 
 const PropertyScreen = () => {
   const route = useRoute();
   const [animationValue] = useState(new Animated.Value(0)); // Animated value for the animation
-  const { item } = route.params;
+  const {item} = route.params;
   useEffect(() => {
     // Trigger the animation when the component mounts
     Animated.timing(animationValue, {
@@ -45,7 +46,7 @@ const PropertyScreen = () => {
 
   // Calculate the animated population values for the pie chart
   const animatedData = [
-    { name: 'Likes', population: item.insights.likes * animationValue._value },
+    {name: 'Likes', population: item.insights.likes * animationValue._value},
     {
       name: 'Views',
       population: item.viewCounts.allTime * animationValue._value,
@@ -74,7 +75,7 @@ const PropertyScreen = () => {
     if (isoDate === undefined) {
       return '';
     } else {
-      const options = { day: 'numeric', month: 'short', year: '2-digit' };
+      const options = {day: 'numeric', month: 'short', year: '2-digit'};
       const formattedDate = date.toLocaleDateString('en-GB', options);
 
       const day = date.getDate();
@@ -82,13 +83,14 @@ const PropertyScreen = () => {
         day % 10 === 1 && day !== 11
           ? 'st'
           : day % 10 === 2 && day !== 12
-            ? 'nd'
-            : day % 10 === 3 && day !== 13
-              ? 'rd'
-              : 'th';
+          ? 'nd'
+          : day % 10 === 3 && day !== 13
+          ? 'rd'
+          : 'th';
 
-      return `${day}${suffix} ${formattedDate.split(' ')[1]}, ${formattedDate.split(' ')[2]
-        }`;
+      return `${day}${suffix} ${formattedDate.split(' ')[1]}, ${
+        formattedDate.split(' ')[2]
+      }`;
     }
   };
 
@@ -119,7 +121,7 @@ const PropertyScreen = () => {
       </View>
       {/* Property Identity */}
       <Image
-        source={{ uri: item?.property.photos[0] }}
+        source={{uri: item?.property.photos[0]}}
         style={{
           width: width - 20,
           height: 250,
@@ -134,7 +136,7 @@ const PropertyScreen = () => {
           top: 210,
           paddingHorizontal: 16,
         }}>
-        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#F2F0EF' }}>
+        <Text style={{fontSize: 22, fontWeight: 'bold', color: '#F2F0EF'}}>
           {item.property.propertyType} in {item.property.location.city}
         </Text>
         <Text
@@ -155,14 +157,12 @@ const PropertyScreen = () => {
         </Text>
       </View>
 
-
-
       <>
-
-        <View style={{
-          flexDirection: "row",
-          // justifyContent: "center"
-        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            // justifyContent: "center"
+          }}>
           <MultiUseGraph count={75} label="Likes" color="red" />
           <MultiUseGraph count={50} label="Views" color="blue" />
 
@@ -267,7 +267,7 @@ const PropertyScreen = () => {
         data={item.property.amenities}
         keyExtractor={item => item.name}
         numColumns={3}
-        renderItem={({ item }) => (
+        renderItem={({item}) => (
           <View
             style={{
               width: responsiveWidth(28),
@@ -295,10 +295,7 @@ const PropertyScreen = () => {
         )}
       />
 
-
-
-
-      {/* <AllTypeGraph/> */}
+      {/* <AllTypeGraph /> */}
       <View>
         {/* <View style={{
 
@@ -313,31 +310,32 @@ const PropertyScreen = () => {
             <LineGraph />
           </View> */}
 
-        <View style={{
-          flexDirection: 'row',
-          // justifyContent:'spac',
-          justifyContent: 'space-around',
-          width: width
-        }}>
+        {/* <View
+          style={{
+            flexDirection: 'row',
+            // justifyContent:'spac',
+            justifyContent: 'space-around',
+            width: width,
+          }}>
           <LineGraph label="Likes" percentage={80} color="red" />
           <LineGraph label="Views" percentage={60} color="blue" />
+        </View> */}
 
-        </View>
-
-        <View style={{
-          flexDirection: 'row',
-          // justifyContent:'spac',
-          justifyContent: 'space-around',
-          width: width
-        }}>
+        {/* <View
+          style={{
+            flexDirection: 'row',
+            // justifyContent:'spac',
+            justifyContent: 'space-around',
+            width: width,
+          }}>
           <LineGraph label="Reached" percentage={90} color="green" />
           <LineGraph label="Chats" percentage={45} color="purple" />
-        </View>
+        </View> */}
         {/* <View style={{
 
           width: width / 2
         }}>
-          <ZigzagGraph data={data} />
+          // <ZigzagGraph data={data} />
         </View> */}
       </View>
       <View>
@@ -345,7 +343,6 @@ const PropertyScreen = () => {
         {/* <BezierGraph data={[10, 50, 30, 70, 20, 90, 40]} /> */}
       </View>
       {/* </View> */}
-
     </ScrollView>
   );
 };
