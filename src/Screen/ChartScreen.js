@@ -1,13 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, Button} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import GraphOnPrace from './GraphOnPrace';
 import GraphChartScreen4 from './GraphChartScreen4';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import AnimatedNumber from './AnimatedNumber';
 
 const ChartScreen = () => {
   const [viewType, setViewType] = useState('day');
-
-  // Sample Instagram-like view data (Replace this with actual data from API)
+  const [viewCount, setViewCount] = useState(6475466); // Sample Instagram-like view data (Replace this with actual data from API)
   const viewCounts = {
     day: [50, 70, 120, 200, 300, 450, 500], // Last 7 days
     week: [1000, 1500, 1800, 2000, 2300], // Last 5 weeks
@@ -44,7 +49,9 @@ const ChartScreen = () => {
         return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     }
   };
-
+  const increase = () => {
+    setViewCount(prev => prev + 1999);
+  };
   return (
     <ScrollView>
       {/* <Text
@@ -93,6 +100,34 @@ const ChartScreen = () => {
                 ))}
             </View> */}
       <GraphOnPrace />
+
+      <View
+        style={{
+          // backgroundColor: 'red',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingTop: responsiveHeight(10),
+          flexDirection: 'row',
+        }}>
+        <Text
+          style={{
+            paddingRight: responsiveWidth(2),
+            fontSize: responsiveFontSize(2),
+          }}>
+          View Count:
+        </Text>
+        <AnimatedNumber number={viewCount} />
+      </View>
+      <TouchableOpacity onPress={increase}>
+        <Text
+          style={{
+            fontSize: responsiveFontSize(2),
+            alignSelf: 'center',
+            paddingTop: responsiveHeight(2),
+          }}>
+          Press me
+        </Text>
+      </TouchableOpacity>
       {/* <GraphChartScreen4/> */}
     </ScrollView>
   );
